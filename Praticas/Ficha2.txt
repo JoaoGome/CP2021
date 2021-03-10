@@ -1,0 +1,108 @@
+Exercício 1
+
+    Alínea b)
+
+        Mostrar que <h, k> . f = <h . f, k . f> (lei 9 do formulário), a partir da lei 6
+
+        <h, k> . f = <h . f, k . f>
+
+        -> pela primeira parte da lei 6: k = <f,g>, mas definir os f,g e k 
+
+            f = h . f 
+            g = k . f 
+            k = <h,k> . f 
+
+        -> pela segunda parte da lei 6
+
+            pi1 . <h,k> . f = h . f 
+            pi2 . <h,k> . f = k . f 
+
+        -> pela lei 7 (Cancelamento-x)
+            h . f = h . f 
+            k . f = k . f 
+
+            which is very much True
+
+Exercício 2
+
+    [const k, const k] = const k 
+
+    -> pela lei 17, temos que definir os k,f,g 
+
+        k = const k 
+        g = const k 
+        f = const k 
+
+        logo const k . i1 = const k e const k . i2 = const k 
+
+    -> pela lei 3:
+
+        const k = const k 
+        const k = const k 
+
+        which is very much trueee
+
+Exercício 3
+
+     ------------ Demonstrar que (f + g) . i1 = i1 . f  ---------- 
+
+    -> pela lei 21 (Def +)
+
+        ([i1 . f, i2 . g]) . i1 = i1 . f 
+
+    -> pela lei 18 (Cancelamento +)
+
+        i1 . f = i1 . f 
+
+
+Exercício 6
+
+    Mostrar que fac . [const 0, succ] = [const 1, mul . <succ,fac>]
+
+    -> pela lei 20
+
+        [fac . const 0, fac . succ] = [const 1, mul . <succ,fac>]
+
+    -> pela lei 27
+
+        fac . const 0 = const 1
+        fac . succ = mul . <succ,fac>
+
+    -> pela lei 71 (usada para acrescentar ariáveis a uma definição point-free)
+
+        (fac . const 0) x = const 1 x
+        (fac . succ) n = (mul . <succ, fac>) n 
+
+    -> pela lei 72 (elimina composições) usada 3 vezes 
+
+        fac (const 0 x) = const 1 x
+        fac (succ n) = mull (<succ,fac> n)
+
+    -> pela definição do enunciado
+
+        fac (const 0 x) = const 1 x
+        fac (n+1) = mull (<succ,fac> n)
+
+    -> pela funções constantes 
+
+        fac 0 = 1
+        fac (n+1) = mull(<succ,fac> n)
+
+    -> pela lei 76 (Def split)
+
+        fac 0 = 1
+        fac (n+1) = mull(succ n, fac n)
+
+    -> pela definição de succ
+
+        fac 0 = 1
+        fac (n+1) = mull(n+1, fac n)
+
+    -> pela definição de mull
+
+        fac 0 = 1
+        fac(n+1) = (n+1) * fac n
+
+
+
+
