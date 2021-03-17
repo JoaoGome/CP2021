@@ -1,0 +1,138 @@
+Exercício 1
+
+    Mostrar que coassocl . coassocr = id 
+
+    -> pela definição de coassocr do enunciado
+
+    coassocl . [id + i1, i2 . i2] = id
+
+    -> pela lei Fusão + (20)
+
+    [coassocl . (id + i1), coassocl . (i2 . i2)] = id 
+
+    -> pela lei Universal + (17)
+
+    id . i1 = coassocl . (id + i1)
+    id . i2 = coassocl . (i2 . i2)
+
+    -> pela lei Natural-id (1)
+
+    i1 = coassocl . (id + i1)
+    i2 = coassocl . i2 . i2
+
+    -> pela lei Def + (21)
+    i1 = coassocl . [i1 . id, i2 . i1]
+    i2 = coassocl . i2 . i2
+
+    -> pela lei 1 e fusão + (20)
+    i1 = [coassocl . i1, coassocl . i2 . i1]
+    i2 = coassocl . i2 . i2
+
+    -> pela lei 17 
+    i1 . i1 = coassocl . i1
+    i1 . i2 = coassocl . i2 . i1
+    i2 = coassocl . i2 . i2
+
+    -> como a igualdade é simetrica aka a = b <=> b = A
+    coassocl . i1 = i1 . i1 
+    coassocl . i2 . i1 = i1 . i2
+    coassocl . i2 . i2 = i2
+
+    -> pela lei 71 aplicada às 3 equaçoes do sistema
+    (coassocl . i1) x = (i1 . i1) x
+    (coassocl . i2 . i1) x = (i1 . i2) x
+    (coassocl . i2 . i2) x = (i2) x
+
+    -> pela lei 72
+    coassocl (i1 x) = i1 (i1 x)
+    coassocl (i2 (i1 x)) = i1 (i2 x)
+    coassocl (i2 (i2 x)) = i2 x
+
+    /////// Convertendo para Haskell stuff ////////// 
+    -> pela lei Either a b = Left a | Right B
+    coassocl (Left x) = Left (Left x)
+    coassocl (Right (Left x)) = Left (Right x)
+    coassocl (Right (Right x)) = Right x
+
+-------------------------------- // -----------------------------
+    
+Exercício 2
+
+    Mostrar a igualdade const (b,a) = <const b, const a>
+
+    -> pela lei Universal-x (6)
+    pi1 . const(b,a) = const b 
+    pi2 . const(b,a) = const a 
+
+    -> pela lei Fusao-const (4)
+    const(pi1(b,a)) = const b 
+    const(pi2(b,a)) = const a 
+
+    -> pela lei 79
+    const b = const b 
+    const a = const a 
+
+    which is True pela propriedade reflexiva da igualdade
+
+-------------------------------- // -----------------------------
+
+Exercício 3
+
+    Mostrar que xr = <pi1 x id, pi2 . pi1> sabendo que xr . <<f,g>,h> = <<f,h>,g>
+
+    Strat para resolver isto: reduzir o split da esquerda para id. 
+    Se ficarmos com xr . id = ... ficamos com a definição de xr
+
+    -> pela lei F2 do enunciado e assumindo que <<f,g>,h> = id
+    xr = <<f,h>,g>  (*)
+
+    Agora queremos resolver a equação <<f,g>,h> = id
+
+    -> pela lei Universal-x (6)
+    pi1 . id = <f,g>
+    pi2 . id = h 
+
+    -> pela lei Natural-id (1)
+    pi1 = <f,g>
+    pi2 = h 
+
+    -> pela lei Universal-x (6)
+    pi1 . pi1 = f 
+    pi2 . pi1 = g
+    pi2 = h
+
+    -> com estes valores de f,g e h substituindo na equação (*)
+    xr = <<pi1 . pi1, pi2>, pi2. pi1>
+
+    -> pela lei 1 para introduzir a identidade
+    xr = <<pi1 . pi1, id . pi2>, pi2 . pi1>
+
+    -> pela lei Def-x (10)
+    xr = <pi1 x id, pi2 . pi1>
+
+-------------------------------- // -----------------------------
+
+Exercício 4
+
+    Usar a lei da troca (28): [⟨f,g⟩ ,⟨h,k⟩] = ⟨[f ,h],[g ,k]⟩
+    para exprimir undistl = [i1 x id, i2 x id] sob a forma de um split de alternativas
+
+    -> pela lei Def-x (10 aplicada duas vezes)
+    
+    undistl = [<i1 . pi1, id . pi2>,<i2 . pi1, id . pi2>]
+
+    -> pela lei da troca
+    <[i1 . pi1, i2 . pi1],[id . pi2, id . pi2]>
+
+    -> pela lei Ntural-id (1)
+    <[i1 . pi1, i2 . pi1],[pi2, pi2]>
+
+    -> pela lei 21
+    <pi1 + pi1, [pi2,pi2]>
+
+    Está a expressão mais simples da lei 
+
+
+
+
+
