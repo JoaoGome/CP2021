@@ -1,0 +1,87 @@
+Exercício 1
+
+    Alinea a)
+
+    f k = ap . (k x id)
+
+    -> pela lei Igualdade Extensional (71)
+    (f k) (a,b) = (ap . (k x id)) (a,b)
+
+    -> pela lei 72
+    (f k) (a,b) = ap((k x id) (a,b))
+
+    -> pela lei 77
+    (f k) (a,b) = ap (k a, id b)
+
+    -> pela lei de id (73)
+    (f k) (a,b) = ap (k a, b)
+
+    -> pela lei 82 (ap)
+    (f k) (a,b) = k a b
+
+    -> renomeando f para uncurry
+
+    uncurry k (a,b) = k a b
+
+    -------------------------------- // -----------------------------
+
+    Alinea b)
+
+    ap . (curry f x id) = f 
+
+    -> pela lei 71
+    (ap . (curry f x id)) (a,b) = f(a,b)
+
+    -> pela lei 72
+    ap ((curry f x id)(a,b)) = f(a,b)
+
+    -> pela lei 77
+    ap (curry f a, id b) = f(a,b)
+
+    -> pela lei de id
+    ap (curry f a, b) = f(a,b)
+
+    -> pela lei 82 (ap)
+    curry f a b = f(a,b)
+
+-------------------------------- // -----------------------------
+
+Exercício 2
+
+Mostrar que a partir da propriedade universal conseguimos derivar a propriedade 36
+
+k = curry f <=> ap . (k x id) = f 
+
+-> queremos cancelar o lado esquerdo, logo k = curry f 
+curry f = curry f <=> ap . (curry f x id) = f 
+
+-> pela propriedade reflexiva da igualdade 
+True <=> ap . (curry f x id) = f 
+
+-> pelas leis de logica
+ap . (curry f x id) = f
+
+-------------------------------- // -----------------------------
+
+Exercício 3
+
+flip (flip f) = f
+
+-> pela definição de flip do enunciado
+flip(curry(uncurry f . swap)) = f
+
+-> pela definição de flip do enunciado
+curry(uncurry(curry(uncurry f . swap)) . swap) = f
+
+-> isomorfismo curry/uncurry (curry uncurry sao inversas)
+curry(uncurry f . swap . swap) = f
+
+-> isomorfismo swap swap (swap . swap dá proprio)
+curry(uncurry f) = f
+
+-> isomorfismo curry/uncurry 
+f = f
+
+
+    
+
